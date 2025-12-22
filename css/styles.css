@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+header {
+width: 100%;  
+display: flex;
+align-items: center;
+padding: 16px 16px;
+gap: 16px; /* controls space between logo and Projects */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.logo img {
+  height: 100px;
+  margin-right: 8px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* MAIN CONTENT */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .image-container {
+  border: 4px solid black;
+  padding: 4px;
+}
+
+.image-container img {
+  max-width: 80vw;
+  max-height: 70vh;
+  display: flex-start;
+} */
+
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  padding: 10px; /* space for borders */
+}
+
+/* image */
+.image-container img {
+  max-width: 80vw;
+  max-height: 70vh;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* first (inner) animated border */
+.image-container::before,
+.image-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  padding: 4px;
+  background: linear-gradient(
+    90deg,
+    red,
+    /* yellow, */
+    lime,
+    /* cyan, */
+    /* blue,
+    magenta, */
+    red
+  );
+  background-size: 300% 300%;
+  animation: borderFlow 6s linear infinite;
+  pointer-events: none;
+}
+
+/* inner border */
+.image-container::before {
+  z-index: 1;
+}
+
+/* outer border */
+.image-container::after {
+  inset: -6px;                /* pushes it outward */
+  animation-duration: 10s;    /* different speed */
+  opacity: 0.9;
+}
+
+/* creates hollow center so border shows */
+.image-container::before,
+.image-container::after {
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* animation */
+@keyframes borderFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
